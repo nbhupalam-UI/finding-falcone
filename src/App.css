@@ -1,0 +1,11 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.App-Content {
+  margin: 20px 0;
+  flex-grow: 1;
+  background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%);
+}
