@@ -2,25 +2,31 @@ import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import store from "./store/store";
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
 import ErrorBar from "./components/common/ErrorBar";
-import MissionControl from "./components/FindingFalcone/MissionControl/MissionControl";
-import MissionReport from "./components/FindingFalcone/MissionReport/MissionReport";
+import Layout from "./hoc/Layout/Layout";
+import asyncComponent from "./hoc/asyncComponent/asyncComponent";
 import "./App.css";
+
+const MissionControlAsync = asyncComponent(() =>
+  import("./components/FindingFalcone/MissionControl/MissionControl")
+);
+
+const MissionReportAsync = asyncComponent(() =>
+  import("./components/FindingFalcone/MissionReport/MissionReport")
+);
 
 function App() {
   return (
     <Provider store={store}>
       <Router>
         <div className="App">
-          <Header />
-          <div className="App-Content">
-            <Route exact path="/" component={MissionControl} />
-            <Route exact path="/report" component={MissionReport} />
-          </div>
+          <Layout>
+            <div className="App-Content">
+              <Route exact path="/" component={MissionControlAsync} />
+              <Route exact path="/report" component={MissionReportAsync} />
+            </div>
+          </Layout>
           <ErrorBar />
-          <Footer />
         </div>
       </Router>
     </Provider>

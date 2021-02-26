@@ -18,7 +18,7 @@ const styles = () => ({
     textAlign: "center",
     display: "flex",
     justifyContent: "center",
-    marginTop: "40px"
+    paddingTop: "40px"
   }
 });
 
