@@ -5,7 +5,8 @@ const styles = () => ({
   },
   toolbar: {
     justifyContent: "space-between",
-    width: "100%"
+    width: "100%",
+    padding: 0
   },
   title: {
     transform: "translateX(-50%)",

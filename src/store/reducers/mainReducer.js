@@ -3,7 +3,9 @@ import {
   SET_VEHICLES,
   INCREMENT_VEHICLE_COUNT,
   DECREMENT_VEHICLE_COUNT,
-  SET_MISSION_RESULT
+  SET_MISSION_RESULT,
+  FIND_FALCONE_START,
+  SET_ERRORS
 } from "../actions/actionTypes";
 
 import { updatedObject } from "../../shared/utility";
@@ -11,15 +13,22 @@ import { updatedObject } from "../../shared/utility";
 const initialState = {
   planets: [],
   vehicles: [],
-  missionResult: {}
+  missionResult: {},
+  loading: false
 };
 
 const setPlanets = (state, planets) => {
-  return updatedObject(state, { planets });
+  return updatedObject(state, { planets, loading: false });
 };
 
 const setVehicles = (state, vehicles) => {
   return updatedObject(state, { vehicles });
+};
+
+const findFalconeStart = (state) => {
+  return updatedObject(state, {
+    loading: true
+  });
 };
 
 // const updateVehicleCount = (state, vehicleName, updateVal) => {
@@ -36,7 +45,7 @@ const setVehicles = (state, vehicles) => {
 // }
 
 const setMissionResult = (state, missionResult) => {
-  return updatedObject(state, { missionResult });
+  return updatedObject(state, { missionResult, loading: false });
 };
 
 const main = (state = initialState, { type, payload }) => {
@@ -71,6 +80,14 @@ const main = (state = initialState, { type, payload }) => {
       };
     case SET_MISSION_RESULT:
       return setMissionResult(state, payload);
+    case FIND_FALCONE_START:
+      return findFalconeStart(state);
+    case SET_ERRORS:
+      return updatedObject(state, {
+        loading: false,
+        planets: [],
+        vehicles: []
+      });
     default:
       return state;
   }

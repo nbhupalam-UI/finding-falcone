@@ -13,6 +13,12 @@ const styles = () => ({
     marginTop: "30px",
     marginBottom: "30px",
     textAlign: "center"
+  },
+  loader: {
+    textAlign: "center",
+    display: "flex",
+    justifyContent: "center",
+    marginTop: "40px"
   }
 });
 

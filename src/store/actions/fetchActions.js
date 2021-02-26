@@ -6,10 +6,16 @@ import {
   VEHICLE_API,
   FIND_FALCONE_API
 } from "../../config/apiUrls";
-import { SET_VEHICLES, SET_PLANETS, SET_MISSION_RESULT } from "./actionTypes";
+import {
+  SET_VEHICLES,
+  SET_PLANETS,
+  SET_MISSION_RESULT,
+  FIND_FALCONE_START
+} from "./actionTypes";
 import { setErrors } from "./errorActions";
 
 export const fetchPlanets = () => (dispatch) => {
+  dispatch(findFalconeStart());
   axios
     .get(PLANET_API)
     .then((res) => {
@@ -33,9 +39,14 @@ export const fetchVehicles = () => (dispatch) => {
     .catch((err) => dispatch(setErrors(err.message)));
 };
 
+const findFalconeStart = () => {
+  return {
+    type: FIND_FALCONE_START
+  };
+};
+
 export const findFalcone = ({ requestData, history }) => (dispatch) => {
-  axios.defaults.headers.common["Accept"] = "application/json";
-  axios.defaults.headers.common["Content-Type"] = "application/json";
+  dispatch(findFalconeStart());
   axios
     .post(FIND_FALCONE_API, requestData)
     .then((res) => {

@@ -40,11 +40,12 @@ const MissionControl = ({
   totalSearchTime,
   errorText,
   token,
-  history
+  history,
+  loading
 }) => {
   const [selectedPlanets, setSelectedPlanets] = useState([]);
   const [selectedVehicles, setSelectedVehicles] = useState([]);
-  const { root, headerColor, reset, actions } = classes;
+  const { root, headerColor, reset, actions, loader } = classes;
 
   useEffect(() => {
     fetchAuthToken();
@@ -111,9 +112,29 @@ const MissionControl = ({
     setSelectedVehicles(selectedVehiclesList);
   };
 
+  if (loading) {
+    return (
+      <div className={loader}>
+        <CircularProgress color="primary" />
+      </div>
+    );
+  }
+
+  if (errorText) {
+    return (
+      <Grid container justify="center">
+        <Grid item style={{ marginTop: "15px" }}>
+          <h2 className={headerColor} align="center">
+            Something went wrong, please try again.
+          </h2>
+        </Grid>
+      </Grid>
+    );
+  }
+
   return (
     <Paper className={root}>
-      {planets.length && vehicles.length ? (
+      {planets.length && vehicles.length && (
         <Grid container justify="center">
           <Grid item xs={12}>
             <h2 className={headerColor} align="center">
@@ -167,18 +188,6 @@ const MissionControl = ({
             </Button>
           </Grid>
         </Grid>
-      ) : (
-        <Grid container justify="center">
-          <Grid item style={{ marginTop: "15px" }}>
-            {errorText ? (
-              <h2 className={headerColor} align="center">
-                Please check your network and try again.
-              </h2>
-            ) : (
-              <CircularProgress color="secondary" />
-            )}
-          </Grid>
-        </Grid>
       )}
     </Paper>
   );
@@ -204,7 +213,8 @@ const mapStateToProps = (state) => ({
   vehicles: state.mainReducer.vehicles,
   totalSearchTime: state.timeReducer.totalSearchTime,
   token: state.authReducer.token,
-  errorText: state.errorReducer.errorText
+  errorText: state.errorReducer.errorText,
+  loading: state.mainReducer.loading
 });
 
 export default connect(mapStateToProps, {

@@ -7,3 +7,4 @@ export const SET_API_TOKEN = "SET_API_TOKEN";
 export const GET_ERRORS = "GET_ERRORS";
 export const SET_ERRORS = "SET_ERRORS";
 export const SET_MISSION_RESULT = "SET_MISSION_RESULT";
+export const FIND_FALCONE_START = "FIND_FALCONE_START";

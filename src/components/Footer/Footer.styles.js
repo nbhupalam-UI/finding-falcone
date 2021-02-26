@@ -4,6 +4,9 @@ const styles = () => ({
   },
   descColor: {
     color: "white"
+  },
+  linkUrl: {
+    fontWeight: 400
   }
 });
 
