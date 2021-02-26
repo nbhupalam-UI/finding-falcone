@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 
 import styles from "./Header.styles";
-import { GEEK_TRUST_HOME_URL } from "../../../config/constants";
+import { GEEK_TRUST_HOME_URL } from "../../config/constants";
 
 class Header extends Component {
   render() {

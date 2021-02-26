@@ -15,16 +15,17 @@ import { fetchAuthToken } from "../../../store/actions/authActions";
 import {
   fetchPlanets,
   fetchVehicles,
-  findFalcone
+  findFalcone,
+  destinationsList
 } from "../../../store/actions/fetchActions";
 import {
   incrementVehicleCount,
   decrementVehicleCount,
-  updateTotalSearchTime
+  updateTotalSearchTime,
+  isAllSelected
 } from "../../../store/actions/updateActions";
 
 import PlanetVehicleSelection from "../PlanetVehicleSelection/PlanetVehicleSelection";
-import { DESTINATION_COUNT } from "../../../config/constants";
 import styles from "./MissionControl.styles";
 
 const MissionControl = ({
@@ -41,10 +42,6 @@ const MissionControl = ({
   token,
   history
 }) => {
-  const destinationsList = Array.from(
-    Array(DESTINATION_COUNT),
-    (_, index) => `Destination ${index + 1}`
-  );
   const [selectedPlanets, setSelectedPlanets] = useState([]);
   const [selectedVehicles, setSelectedVehicles] = useState([]);
   const { root, headerColor, reset, actions } = classes;
@@ -114,16 +111,6 @@ const MissionControl = ({
     setSelectedVehicles(selectedVehiclesList);
   };
 
-  const isAllSelected = () => {
-    const selectedPlanetCount = selectedPlanets.reduce((count, current) => {
-      return current ? ++count : count;
-    }, 0);
-    const selectedVehicleCount = selectedVehicles.reduce((count, current) => {
-      return current ? ++count : count;
-    }, 0);
-    return selectedPlanetCount === 4 && selectedVehicleCount === 4;
-  };
-
   return (
     <Paper className={root}>
       {planets.length && vehicles.length ? (
@@ -153,7 +140,6 @@ const MissionControl = ({
                 handlePlanetChange={handlePlanetChange}
                 handleVehicleChange={handleVehicleChange}
                 planetIndex={index}
-                getTimeTaken={getTimeTaken}
               />
             </Grid>
           ))}
@@ -167,7 +153,7 @@ const MissionControl = ({
               variant="contained"
               color="primary"
               onClick={onSubmitData}
-              disabled={!isAllSelected()}
+              disabled={!isAllSelected(selectedPlanets, selectedVehicles)}
             >
               Find Falcone!
             </Button>

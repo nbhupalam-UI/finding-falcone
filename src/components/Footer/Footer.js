@@ -2,7 +2,7 @@ import React from "react";
 import { Paper, Grid } from "@material-ui/core";
 import { withStyles } from "@material-ui/core";
 
-import { GEEK_TRUST_HOME_URL as GEEK_TRUST_CHALLENGE_URL } from "../../../config/constants";
+import { GEEK_TRUST_HOME_URL as GEEK_TRUST_CHALLENGE_URL } from "../../config/constants";
 import styles from "./Footer.styles";
 
 function Footer({ classes }) {

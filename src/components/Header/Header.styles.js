@@ -10,7 +10,8 @@ const styles = () => ({
   title: {
     transform: "translateX(-50%)",
     left: "50%",
-    position: "absolute"
+    position: "absolute",
+    fontWeight: "bold"
   },
   textCenter: {
     textAlign: "center"

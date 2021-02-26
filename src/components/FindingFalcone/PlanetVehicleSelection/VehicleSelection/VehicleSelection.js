@@ -11,10 +11,6 @@ import {
   FormLabel
 } from "@material-ui/core";
 
-function StyledRadio(props) {
-  return <Radio disableRipple color="default" {...props} />;
-}
-
 const styles = () => ({
   root: {
     marginTop: "20px",
@@ -42,7 +38,7 @@ const VehicleSelection = ({
           <FormControlLabel
             key={index}
             value={vehicle.name}
-            control={<StyledRadio />}
+            control={<Radio disableRipple color="default" />}
             label={`${vehicle.name} (${vehicle.total_no})`}
             onChange={onVehicleSelect}
             disabled={

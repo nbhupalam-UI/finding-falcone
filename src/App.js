@@ -2,8 +2,8 @@ import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import store from "./store/store";
-import Header from "./components/common/Header/Header";
-import Footer from "./components/common/Footer/Footer";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 import ErrorBar from "./components/common/ErrorBar";
 import MissionControl from "./components/FindingFalcone/MissionControl/MissionControl";
 import MissionReport from "./components/FindingFalcone/MissionReport/MissionReport";
